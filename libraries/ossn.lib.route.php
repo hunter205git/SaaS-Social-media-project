@@ -65,6 +65,7 @@ function ossn_route() {
         'locale' => "$root/locale/",
         'sys' => "$root/system/",
         'configs' => "$root/configurations/",
+        'install' => "$root/installation/",
         'themes' => "$root/themes/",
         'pages' => "$root/pages/",
         'com' => "$root/components/",

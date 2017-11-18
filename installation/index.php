@@ -28,11 +28,19 @@ require_once(dirname(__FILE__) . '/classes/OssnInstall.php');
 //geneate .htaccess file #432
 ossn_generate_server_config_setup('apache');
 
-if (!isset($_REQUEST['action'])) {
-    ossn_installation_page();
-}
+//if (!isset($_REQUEST['action'])) {
+//    ossn_installation_page();
+//}
+//if (!isset($_REQUEST['page'])) {
+//    ossn_installation_actions();
+//}
 if (!isset($_REQUEST['page'])) {
-    ossn_installation_actions();
+    include_once(ossn_installation_paths()->root . 'actions/install.php');
 }
-  
-
+else if($_REQUEST['page']=='account'){
+    include_once(ossn_installation_paths()->root . 'actions/account.php');
+}else if($_REQUEST['page']=='installed'){ //installed
+    include_once(ossn_installation_paths()->root . 'actions/finish.php');
+}
+else
+    exit;

@@ -30,26 +30,26 @@ $settings = new OssnSite;
 $Ossn->siteSettings = $settings->getAllSettings();
 
 /*
- * Set exceptions handler 
+ * Set exceptions handler
  */
-set_exception_handler('_ossn_exception_handler'); 
+set_exception_handler('_ossn_exception_handler');
 /**
- * ossn_recursive_array_search 
+ * ossn_recursive_array_search
  * Searches the array for a given value and returns the corresponding key if successful
  * @source: http://php.net/manual/en/function.array-search.php
- * 
+ *
  * @param mixed $needle The searched value. If needle is a string, the comparison is done in a case-sensitive manner.
  * @param array $haystack The array
  * @return false|integer
  */
-function ossn_recursive_array_search($needle, $haystack) { 
-    foreach($haystack as $key => $value) { 
-        $current_key = $key; 
-        if(($needle === $value) || (is_array($value) && ossn_recursive_array_search($needle, $value))) { 
-            return $current_key; 
-        } 
-    } 
-    return false; 
+function ossn_recursive_array_search($needle, $haystack) {
+    foreach($haystack as $key => $value) {
+        $current_key = $key;
+        if(($needle === $value) || (is_array($value) && ossn_recursive_array_search($needle, $value))) {
+            return $current_key;
+        }
+    }
+    return false;
 }
 /**
  * Get site url
@@ -118,8 +118,8 @@ function ossn_package_information() {
  *
  * @return bool
  *
- * This part is contain code from project called Elgg 
- * 
+ * This part is contain code from project called Elgg
+ *
  * See licenses/elgg/LICENSE.txt
  */
 function ossn_add_hook($hook, $type, $callback, $priority = 200) {
@@ -319,7 +319,7 @@ function redirect($new = '') {
 		}
     }
 	if(ossn_is_xhr()){
-		$Ossn->redirect = $url;	
+		$Ossn->redirect = $url;
 	} else {
     	header("Location: {$url}");
 		exit;
@@ -496,14 +496,14 @@ function ossn_trigger_message($message, $type = 'success') {
 }
 /**
  * Display a error if post size exceed
- * 
+ *
  * @param string $error Langauge string
  * @param string $redirect Custom redirect url
  */
 function ossn_post_size_exceed_error($error = 'ossn:post:size:exceed', $redirect = null){
 	if(!empty($_SERVER['CONTENT_LENGTH']) && empty($_POST)){
 			if(empty($redirect)){
-				$redirect = null;	
+				$redirect = null;
 			}
 			ossn_trigger_message(ossn_print($error), 'error');
 			redirect($redirect);
@@ -657,7 +657,7 @@ function ossn_string_decrypt($string = '', $key = '') {
 	}
 	if(empty($key)){
 		$key = ossn_site_settings('site_key');
-	}	
+	}
 	$size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
 	$mcgetvi = mcrypt_create_iv($size, MCRYPT_RAND);
     return mcrypt_decrypt(MCRYPT_BLOWFISH, $key, $string, MCRYPT_MODE_ECB, $mcgetvi);
@@ -674,14 +674,14 @@ function ossn_errros() {
     if ($settings == 'on' || is_file(ossn_route()->www . 'DISPLAY_ERRORS')) {
         error_reporting(E_NOTICE ^ ~E_WARNING);
 
-        ini_set('log_errors', 1);		
+        ini_set('log_errors', 1);
 	    ini_set('error_log', ossn_route()->www . 'error_log');
 
 	   set_error_handler('_ossn_php_error_handler');
     } elseif ($settings !== 'on') {
 	   ini_set("log_errors", 0);
         ini_set('display_errors', 'off');
-    } 
+    }
 }
 /**
  * Intercepts catchable PHP errors.
@@ -720,7 +720,7 @@ function _ossn_php_error_handler($errno, $errmsg, $filename, $linenum, $vars) {
 		case E_WARNING :
 		case E_USER_WARNING :
 		case E_RECOVERABLE_ERROR: // (e.g. type hint violation)
-			
+
 			// check if the error wasn't suppressed by the error control operator (@)
 			if (error_reporting()) {
 				error_log("PHP WARNING: $error");
@@ -765,6 +765,7 @@ function ossn_check_update() {
  * @access public;
  */
 function _ossn_exception_handler($exception){
+    return;
 	$params['exception'] = $exception;
 	//support at least exception message  #1014
 	error_log($params['exception']);
@@ -801,7 +802,7 @@ function ossn_generate_server_config($type){
 }
 /**
  * Ossn Dump
- * 
+ *
  * Dump a variable
  *
  * @param array}object}string}integer}boolean $param A variable you wanted to dump.
@@ -819,7 +820,7 @@ function ossn_dump($params = '', $clean = true){
 		}
 		echo "</pre>";
 	 	$content = ob_get_contents();
-  		ob_end_clean();		
+  		ob_end_clean();
 		return $content;
 	}
 	return false;

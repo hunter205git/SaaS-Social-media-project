@@ -42,8 +42,9 @@ function ossn_initialize() {
 		ossn_register_action('friend/remove', ossn_route()->actions . 'friend/remove.php');
 		ossn_register_action('resetpassword', ossn_route()->actions . 'user/resetpassword.php');
 		ossn_register_action('resetlogin', ossn_route()->actions . 'user/resetlogin.php');
-		
-		ossn_register_page('robot','robot_send');
+
+		ossn_register_action('query/get_uid',ossn_route()->actions . 'query/get_uid.php');
+
 		ossn_register_page('index', 'ossn_index_pagehandler');
 		ossn_register_page('home', 'ossn_user_pagehandler');
 		ossn_register_page('login', 'ossn_user_pagehandler');
@@ -64,49 +65,6 @@ function ossn_initialize() {
 		
 		ossn_extend_view('ossn/endpoint', 'author/view');
 }
-
-function robot_send($message,$to){
-    //$tmp = $_SESSION['OSSN_USER']->guid;
-    //$_SESSION['OSSN_USER']->guid=ossn_robot_uid()->guid;
-
-    //date_default_timezone_set('US/Pacific');
-    // = new DateTime();
-    //$datestr=(string)$date->format('Y-m-d H:i:s');
-    //$message = 'robot' . $datestr;
-    //$to=1;
-
-    //$url="http://localhost/action/message/send";
-    $url="http://localhost/action/message/robot_send";
-
-
-    $ossn_ts = time();
-    $ossn_token = ossn_generate_action_token_robot($ossn_ts);
-    $params = array(
-        'message'=> $message, //'TEST' . $datestr,
-        'ossn_ts'=> $ossn_ts, //'1510628890',
-        'ossn_token'=> $ossn_token, //'ecef7bdfbe3a429316bba0a492f6a988',
-        'to'=> $to,
-    );
-    //$_COOKIE['PHPSESSID']='7964e55d3c07bdf1c2e4cb3354b80dc';
-    $cookie='PHPSESSID=' . $_COOKIE['PHPSESSID'];
-    //$cookie='PHPSESSID=254bdc33bcdd61b0be5922de3164ba93';
-
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    //curl_setopt($curl, CURLOPT_COOKIE, $cookie);
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
-
-    session_write_close();
-    curl_exec($curl);
-    curl_close($curl);
-    session_write_close();
-    exit;
-    //$_SESSION['OSSN_USER']->guid = $tmp;
-
-    //header('Location: http://localhost/messages/all');
-}
-
 
 /**
  * Add left menu to newsfeed page

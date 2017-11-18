@@ -12,17 +12,20 @@
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/system/start.php');
 
-$user['username'] = input('username');
-$user['firstname'] = input('firstname');
-$user['lastname'] = input('lastname');
-$user['email'] = input('email');
-$user['reemail'] = input('email_re');
-$user['password'] = input('password');
-$user['gender'] = input('gender');
+$file_content = file_get_contents(dirname(__FILE__) . '/../ossn.config.json');
+$json = json_decode($file_content, true);
 
-$user['bdd'] = input('birthday');
-$user['bdm'] = input('birthm');
-$user['bdy'] = input('birthy');
+$user['username']   = $json['username'] ;
+$user['firstname']  = $json['firstname'];
+$user['lastname']   = $json['lastname'] ;
+$user['email']      = $json['email']    ;
+//$user['reemail']  = $json['reemail'];
+$user['password']   = $json['password'] ;
+$user['gender']     = $json['gender']   ;
+
+$user['bdd']        = $json['bdd']      ;
+$user['bdm']        = $json['bdm']      ;
+$user['bdy']        = $json['bdy']      ;
 
 foreach ($user as $field => $value) {
     if (empty($value)) {
@@ -31,10 +34,10 @@ foreach ($user as $field => $value) {
     }
 }
 
-if ($user['reemail'] !== $user['email']) {
-    ossn_installation_message(ossn_print('emai:match:error'), 'fail');
-    redirect(REF);
-}
+//if ($user['reemail'] !== $user['email']) {
+//    ossn_installation_message(ossn_print('emai:match:error'), 'fail');
+//    redirect(REF);
+//}
 
 
 $user['birthdate'] = "{$user['bdd']}/{$user['bdm']}/{$user['bdy']}";

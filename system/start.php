@@ -21,6 +21,11 @@ if (!is_file(ossn_route()->configs . 'ossn.config.site.php') && !is_file(ossn_ro
     header("Location: installation");
 	exit;
 }
+
+//if(!is_file(ossn_route()->install . 'INSTALLED')){
+//    header("Location: installation");
+//    exit;
+//}
 include_once(ossn_route()->configs . 'libraries.php');
 include_once(ossn_route()->configs . 'classes.php');
 

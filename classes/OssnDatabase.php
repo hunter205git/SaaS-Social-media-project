@@ -309,4 +309,5 @@ class OssnDatabase extends OssnBase {
 				unset($this->database);
 				unset($this->exe);
 		}
+    
 } //class

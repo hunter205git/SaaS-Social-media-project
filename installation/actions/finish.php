@@ -20,6 +20,9 @@ $factory = new OssnFactory(array(
 ));
 $factory->connect;
 
-$installed = ossn_installation_paths()->ossn_url . 'administrator';
+//$installed = ossn_installation_paths()->ossn_url . 'administrator';
+//header("Location: {$installed}");
+
+$installed = ossn_installation_paths()->ossn_url;
 header("Location: {$installed}");
   

@@ -12,6 +12,7 @@ if (ossn_is_xhr()) {
     header('Content-Type: application/json');
 }
 if (ossn_add_friend(ossn_loggedin_user()->guid, input('user'))) {
+
     if (!ossn_is_xhr()) {
         ossn_trigger_message(ossn_print('ossn:friend:request:submitted'));
         redirect(REF);

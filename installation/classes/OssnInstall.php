@@ -256,6 +256,9 @@ class OssnInstallation {
 		 * @return bool;
 		 */
 		public function INSTALL() {
+
+                $this->create_db();
+
 				if(stripos($this->datadir, $this->ossnInstallationDir()) === 0) {
 						$this->error_mesg = ossn_installation_print('data:directory:outside');
 						return false;
@@ -276,7 +279,7 @@ class OssnInstallation {
 						$errors         = array();
 						$script         = preg_replace('/\-\-.*\n/', '', $script);
 						$sql_statements = preg_split('/;[\n\r]+/', $script);
-						
+
 						foreach($sql_statements as $statement) {
 								$statement = trim($statement);
 								if(!empty($statement)) {
@@ -299,6 +302,8 @@ class OssnInstallation {
 								$msg = $errortxt;
 								throw new Exception($msg);
 						}
+                        $this->add_friend(1, 2);
+                        $this->add_friend(2, 1);
 				}
 				return true;
 		}
@@ -312,6 +317,31 @@ class OssnInstallation {
 		public static function ossnInstallationDir() {
 				return str_replace("\\", "/", dirname(dirname(dirname(__FILE__)))) . '/';
 		}
+
+        public function create_db(){
+
+            // Create connection
+            $conn = new mysqli($this->dbhost, $this->dbusername, $this->dbpassword);
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+                $this->connect_err->connect_errn = mysqli_connect_error();
+                return false;
+            }
+
+            // Create database
+            $sql = "DROP DATABASE IF EXISTS " . $this->dbname . ";";
+            if(!($conn->query($sql) === TRUE))
+                echo "Error deleting existing database";
+            $sql = "CREATE DATABASE " . $this->dbname . ";";
+            if ($conn->query($sql) === TRUE) {
+                echo "Database created successfully";
+            } else {
+                echo "Error creating database: " . $conn->error;
+            }
+
+            $conn->close();
+        }
 		
 		/**
 		 * Connect to database;
@@ -335,6 +365,7 @@ class OssnInstallation {
 		 * @Reason: Initial;
 		 */
 		function configurations_db() {
+
 				$params       = array(
 						'host' => $this->dbhost,
 						'port' => $this->dbport,
@@ -369,6 +400,7 @@ class OssnInstallation {
 		 * @return bool;
 		 */
 		function configurations_site() {
+
 				$params       = array(
 						'siteurl' => $this->weburl,
 						'datadir' => $this->datadir
@@ -392,4 +424,19 @@ class OssnInstallation {
 				
 				return true;
 		}
+
+        function add_friend($from, $to) {
+
+		    $statement = "INSERT INTO ossn_relationships (relation_from, relation_to, type, time) values(";
+		    $statement .= $from . ", ";
+		    $statement .= $to . ", ";
+		    $statement .="'friend:request'" . ", ";
+		    $statement .= time() . ");";
+            try {
+                $this->dbconnect()->query($statement);
+            }
+            catch(Exception $e) {
+                $errors[] = $e->getMessage();
+            }
+        }
 } //class

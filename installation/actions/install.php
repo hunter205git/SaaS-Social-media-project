@@ -9,19 +9,22 @@
  * @link      https://www.opensource-socialnetwork.org/
  */
 
+$file_content = file_get_contents(dirname(__FILE__) . '/../ossn.config.json');
+$json = json_decode($file_content, true);
+
 $Settings = new OssnInstallation;
-$Settings->dbusername($_POST['dbuser']);
-$Settings->dbpassword($_POST['dbpwd']);
-$Settings->dbhost($_POST['dbhost']);
-$Settings->dbname($_POST['dbname']);
-$Settings->weburl($_POST['url']);
-$Settings->datadir($_POST['datadir']);
+$Settings->dbusername($json['dbuser']);
+$Settings->dbpassword($json['dbpassword']);
+$Settings->dbhost($json['host']);
+$Settings->dbname($json['dbname']);
+$Settings->weburl($json['url']);
+$Settings->datadir($json['userdata']);
 $Settings->setStartupSettings(array(
-    'owner_email' => $_POST['owner_email'],
-    'notification_email' => $_POST['notification_email'],
-    'sitename' => $_POST['sitename']
+    'owner_email' => $json['owner_email'],
+    'notification_email' => $json['notify_email'],
+    'sitename' => $json['site']
 ));
-if(empty($_POST['owner_email']) || empty($_POST['notification_email']) || empty($_POST['sitename'])){
+if(empty($json['owner_email']) || empty($json['notify_email']) || empty($json['site'])){
 	    ossn_installation_message(ossn_installation_print('fields:require'), 'fail');
     	$failed = ossn_installation_paths()->url . '?page=settings';
 		header("Location: {$failed}");	
