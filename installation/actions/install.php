@@ -9,7 +9,7 @@
  * @link      https://www.opensource-socialnetwork.org/
  */
 
-$file_content = file_get_contents(dirname(__FILE__) . '/../ossn.config.json');
+$file_content = file_get_contents(dirname(dirname(__FILE__)) . '/ossn.config.json');
 $json = json_decode($file_content, true);
 
 $Settings = new OssnInstallation;

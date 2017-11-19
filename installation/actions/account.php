@@ -12,7 +12,7 @@
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/system/start.php');
 
-$file_content = file_get_contents(dirname(__FILE__) . '/../ossn.config.json');
+$file_content = file_get_contents(dirname(dirname(__FILE__)) . '/ossn.config.json');
 $json = json_decode($file_content, true);
 
 $user['username']   = $json['username'] ;
