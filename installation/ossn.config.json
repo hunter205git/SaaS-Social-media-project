@@ -13,10 +13,9 @@
   "dbuser": "root",
   "dbpassword": "root",
   "dbname": "ossn",
-  "url": "http://localhost/",
-  "userdata": "/var/www/html/DMSN/ossn_data",
+  "url": "http://ec2-54-183-248-169.us-west-1.compute.amazonaws.com/",
+  "userdata": "/var/www/ossndatadir/",
   "owner_email": "owner@ossn.com",
   "notify_email": "noreply@ossn.com",
   "site": "DMSN"
 }
-
