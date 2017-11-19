@@ -14,7 +14,7 @@
   "dbpassword": "root",
   "dbname": "ossn",
   "url": "http://localhost/",
-  "userdata": "D:/Github/ossn_data/",
+  "userdata": "/var/www/html/DMSN/ossn_data",
   "owner_email": "owner@ossn.com",
   "notify_email": "noreply@ossn.com",
   "site": "DMSN"
