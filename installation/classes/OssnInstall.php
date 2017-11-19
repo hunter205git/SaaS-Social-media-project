@@ -302,8 +302,10 @@ class OssnInstallation {
 								$msg = $errortxt;
 								throw new Exception($msg);
 						}
-                        $this->add_friend(1, 2);
-                        $this->add_friend(2, 1);
+                        if(!($this->add_friend(1, 2)))
+                            echo "Add friend error";
+                        if(!($this->add_friend(2, 1)))
+                            echo "Add friend error";
 				}
 				return true;
 		}
@@ -437,6 +439,9 @@ class OssnInstallation {
             }
             catch(Exception $e) {
                 $errors[] = $e->getMessage();
+                print_r($errors);
+                return false;
             }
+            return true;
         }
 } //class
