@@ -24,6 +24,10 @@ define('REF', true);
 /*
  * Load site settings , so the setting should not load agian and again
  */
+
+$file_content = file_get_contents(dirname(dirname(__FILE__)) . '/installation/ossn.config.json');
+$json = json_decode($file_content, true);
+
 global $Ossn;
 
 $settings = new OssnSite;

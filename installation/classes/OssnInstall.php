@@ -234,6 +234,18 @@ class OssnInstallation {
 						$this->weburl = $weburl;
 				}
 		}
+
+        public function socketport($socketport) {
+            if(!empty($socketport)) {
+                $this->socketPort = $socketport;
+            }
+        }
+
+        public function server($server) {
+            if(!empty($server)) {
+                $this->server = $server;
+            }
+        }
 		
 		/**
 		 * Set a datadriectory;
@@ -405,7 +417,9 @@ class OssnInstallation {
 
 				$params       = array(
 						'siteurl' => $this->weburl,
-						'datadir' => $this->datadir
+						'datadir' => $this->datadir,
+                        'server'  => $this->server,
+                        'socketport' => $this->socketPort,
 				);
 				$this->path   = str_replace('installation/', '', ossn_installation_paths()->root);
 				$templateFile = $this->path . "configurations/ossn.config.site.example.php";

@@ -66,6 +66,18 @@ $robot->sendactiviation = false;
 $robot->usertype = 'normal';
 $robot->validated = true;
 
+$test = new OssnUser;
+$test->username = 'testuser';
+$test->first_name = 'Test';
+$test->last_name = 'User';
+$test->email = 'testuser@ossn.com';
+$test->password = $user['password'];
+$test->gender = $user['gender'];
+$test->birthdate = $user['birthdate'];
+$test->sendactiviation = false;
+$test->usertype = 'normal';
+$test->validated = true;
+
 if (!$add->isUsername($user['username'])) {
     ossn_installation_message(ossn_print('username:error'), 'fail');
     redirect(REF);
@@ -77,6 +89,7 @@ if (!$add->isPassword()) {
 
 if ($add->addUser()) {
     $robot->addUser();
+    $test->addUser();
     ossn_installation_message(ossn_print('account:created'), 'success');
     redirect('installation?page=installed');
 } else {

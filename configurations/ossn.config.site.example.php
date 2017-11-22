@@ -11,4 +11,6 @@
 
 $Ossn->url = '<<siteurl>>';
 $Ossn->userdata = '<<datadir>>';
+$Ossn->server = '<<server>>';
+$Ossn->socketPort = '<<socketport>>';
 

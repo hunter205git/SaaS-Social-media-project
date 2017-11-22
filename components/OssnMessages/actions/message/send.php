@@ -10,17 +10,19 @@
  */
 
 $send = new OssnMessages;
+$to_email = input('email');
 $message = input('message');
 $to = input('to');
-if($to==ossn_robot_uid()->guid)
+if($from==ossn_robot_uid()->guid)
 {
     robot_send($message,1);
     render_view($message);
 }
-else if($from==ossn_robot_uid()->guid)
+else if($to==ossn_robot_uid()->guid)
 {
     // To do: $to should be an email address
-    send_to_socket($from, $to, $message);
+    //$to_email = $message;
+    send_to_socket($from, $to_email, $message);
     render_view($message);
 }
 else if ($send->send(ossn_loggedin_user()->guid, $to, $message))
@@ -37,8 +39,8 @@ else
 exit;
 
 function robot_send($message,$to){
-
-    $url="http://localhost/action/message/robot_send";
+    global $Ossn;
+    $url=$Ossn->url . "action/message/robot_send";
 
     //$ossn_ts = time();
     //$ossn_token = ossn_generate_action_token_robot($ossn_ts);
@@ -64,17 +66,18 @@ function robot_send($message,$to){
     exit;
 }
 
-function sent_to_socket($from, $to_email, $message)
+function send_to_socket($from, $to_email, $message)
 {
+    global $Ossn;
     error_reporting(E_ALL);
 
-    echo "<h2>TCP/IP Connection</h2>\n";
+    //echo "<h2>TCP/IP Connection</h2>\n";
 
     /* Get the port for the WWW service. */
-    $service_port = 10000;//getservbyname('www', 'tcp');
+    $service_port = $Ossn->socketPort;//getservbyname('www', 'tcp');
 
     /* Get the IP address for the target host. */
-    $address = gethostbyname('www.ec2-54-219-130-240.us-west-1.compute.amazonaws.com');
+    $address = gethostbyname($Ossn->server);
     //$address = '127.0.0.1';
 
     /* Create a TCP/IP socket. */
@@ -82,34 +85,39 @@ function sent_to_socket($from, $to_email, $message)
     if ($socket === false) {
         echo "socket_create() failed: reason: " . socket_strerror(socket_last_error()) . "\n";
     } else {
-        echo "OK.\n";
+        //echo "OK.\n";
     }
 
-    echo "Attempting to connect to '$address' on port '$service_port'...";
+    //echo "Attempting to connect to '$address' on port '$service_port'...";
     $result = socket_connect($socket, $address, $service_port);
     if ($result === false) {
         echo "socket_connect() failed.\nReason: ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
     } else {
-        echo "OK.\n";
+        //echo "OK.\n";
     }
 
-    $in = "HEAD / HTTP/1.1\r\n";
-    $in .= "Host: 127.0.0.1\r\n";
-    $in .= "Connection: Close\r\n\r\n";
-    $out = '';
+//    $in = "HEAD / HTTP/1.1\r\n";
+//    $in .= "Host: 127.0.0.1\r\n";
+//    $in .= "Connection: Close\r\n\r\n";
+//    $out = '';
 
-    echo "Sending HTTP HEAD request...";
-    socket_write($socket, $in, strlen($in));
-    echo "OK.\n";
+    $param['email']=$to_email;
+    $param['message']=$message;
+
+    $json = json_encode($param);
+    //$json .= "\r\n";
+    //echo "Sending HTTP HEAD request...";
+    socket_write($socket, $json, strlen($json));
+    //echo "OK.\n";
 
 //    echo "Reading response:\n\n";
 //    while ($out = socket_read($socket, 2048)) {
 //        echo $out;
 //    }
 
-    echo "Closing socket...";
+    //echo "Closing socket...";
     socket_close($socket);
-    echo "OK.\n\n";
+    //echo "OK.\n\n";
 }
 
 function render_view($message)

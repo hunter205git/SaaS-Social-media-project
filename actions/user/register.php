@@ -49,7 +49,9 @@ $add->first_name = $user['firstname'];
 $add->last_name = $user['lastname'];
 $add->email = $user['email'];
 $add->password = $user['password'];
-$add->sendactiviation = true;
+//$add->sendactiviation = true;
+$add->sendactiviation = false;
+$add->validated = true;
 
 foreach($fields as $items){
 	foreach($items as $field){

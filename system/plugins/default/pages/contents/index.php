@@ -25,7 +25,7 @@
                 	<li><i class="fa fa-users"></i></li>
                 	<li><i class="fa fa-comments-o"></i></li>
                 	<li><i class="fa fa-envelope"></i></li>
-                	<li><i class="fa fa-globe"></i></li>
+                    <li><i class="fa fa-globe"></i></li>
                 	<li><i class="fa fa-picture-o"></i></li>
                 	<li><i class="fa fa-video-camera"></i></li>
                 	<li><i class="fa fa-map-marker"></i></li>

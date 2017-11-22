@@ -34,7 +34,6 @@ function ossn_messages() {
 		//if(ossn_isLoggedin()) {
         if(true) {
 				ossn_register_action('message/send', __OSSN_MESSAGES__ . 'actions/message/send.php');
-                ossn_register_action('message/robot_send', __OSSN_MESSAGES__ . 'actions/message/robot_send.php');
 				$user_loggedin = ossn_loggedin_user();
 				$icon          = ossn_site_url('components/OssnMessages/images/messages.png');
 				ossn_register_sections_menu('newsfeed', array(
@@ -44,6 +43,15 @@ function ossn_messages() {
 						'parent' => 'links',
 						'icon' => $icon
 				));
+                ossn_register_action('message/robot_send', __OSSN_MESSAGES__ . 'actions/message/robot_send.php');
+                $icon          = ossn_site_url('components/OssnMessages/images/smartbot.png');
+                ossn_register_sections_menu('newsfeed', array(
+                        'name' => 'smartbot',
+                        'text' => 'SmartBot',
+                        'url' => ossn_site_url('messages/message/smartbot'),
+                        'parent' => 'links',
+                        'icon' => $icon
+                ));
 				
 		}
 		//callbacks

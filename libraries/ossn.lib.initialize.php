@@ -31,6 +31,7 @@ function ossn_initialize() {
 				'parent' => 'links',
 				'icon' => $icon
 		));
+
 		ossn_extend_view('ossn/js/head', 'javascripts/head');
 		ossn_extend_view('ossn/admin/js/head', 'javascripts/head');
 		//actions
@@ -74,6 +75,10 @@ function ossn_initialize() {
 function newfeed_menu_handler($hook, $type, $return) {
 		$return[] = ossn_view_sections_menu('newsfeed');
 		return $return;
+}
+function smartbot_menu_handler($hook, $type, $return) {
+    $return[] = ossn_view_sections_menu('smartbot');
+    return $return;
 }
 
 /**

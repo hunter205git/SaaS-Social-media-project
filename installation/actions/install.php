@@ -18,6 +18,8 @@ $Settings->dbpassword($json['dbpassword']);
 $Settings->dbhost($json['host']);
 $Settings->dbname($json['dbname']);
 $Settings->weburl($json['url']);
+$Settings->socketPort($json['socketport']);
+$Settings->server($json['server']);
 $Settings->datadir($json['userdata']);
 $Settings->setStartupSettings(array(
     'owner_email' => $json['owner_email'],

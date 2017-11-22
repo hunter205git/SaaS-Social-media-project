@@ -1225,7 +1225,10 @@ a {
     content: "\f03e" !important;
 }
 .menu-section-item-messages:before {
-    content: "\f0e0" !important;
+content: "\f0e0" !important;
+}
+.menu-section-item-smartbot:before {
+content: "\f0e6" !important;
 }
 .menu-section-item-invite-friends:before {
     content: "\f234" !important;

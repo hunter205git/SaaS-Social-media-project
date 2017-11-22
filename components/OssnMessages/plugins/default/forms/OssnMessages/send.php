@@ -1,3 +1,10 @@
+
+                <?php if($params['user']->guid == ossn_robot_uid()->guid) {
+                    echo "<textarea name=\"email\" placeholder=\"";
+                    echo "Email";
+                    echo "\"></textarea>";
+                }
+                ?>
                 <textarea name="message" placeholder="<?php echo ossn_print('message:placeholder'); ?>"></textarea>
                 <input type="hidden" name="to" value="<?php echo $params['user']->guid; ?>"/>
 

@@ -17,5 +17,8 @@
   "userdata": "/var/www/ossndatadir/",
   "owner_email": "owner@ossn.com",
   "notify_email": "noreply@ossn.com",
-  "site": "DMSN"
+  "site": "DMSN",
+  "socketport":"10000",
+  "server": "http://ec2-13-57-25-157.us-west-1.compute.amazonaws.com/"
 }
+
