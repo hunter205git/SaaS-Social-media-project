@@ -44,7 +44,7 @@ function ossn_initialize() {
 		ossn_register_action('resetpassword', ossn_route()->actions . 'user/resetpassword.php');
 		ossn_register_action('resetlogin', ossn_route()->actions . 'user/resetlogin.php');
 
-		ossn_register_action('query/get_uid',ossn_route()->actions . 'query/get_uid.php');
+        ossn_register_action('query/get_uid',ossn_route()->actions . 'query/get_uid.php');
 
 		ossn_register_page('index', 'ossn_index_pagehandler');
 		ossn_register_page('home', 'ossn_user_pagehandler');
@@ -66,7 +66,11 @@ function ossn_initialize() {
 		
 		ossn_extend_view('ossn/endpoint', 'author/view');
 }
-
+function get_uid(){
+    $a = input('email');
+    echo $a;
+    return;
+}
 /**
  * Add left menu to newsfeed page
  *

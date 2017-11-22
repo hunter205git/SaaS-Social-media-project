@@ -105,7 +105,7 @@ function send_to_socket($from, $to_email, $message)
     $param['message']=$message;
 
     $json = json_encode($param);
-    //$json .= "\r\n";
+    $json .= "\r\n";
     //echo "Sending HTTP HEAD request...";
     socket_write($socket, $json, strlen($json));
     //echo "OK.\n";

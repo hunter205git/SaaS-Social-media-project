@@ -314,10 +314,14 @@ class OssnInstallation {
 								$msg = $errortxt;
 								throw new Exception($msg);
 						}
-                        if(!($this->add_friend(1, 2)))
+                        if(!($this->add_friend(1, 2))) {
                             echo "Add friend error";
-                        if(!($this->add_friend(2, 1)))
+                            exit;
+                        }
+                        if(!($this->add_friend(2, 1))){
                             echo "Add friend error";
+                            exit;
+                        }
 				}
 				return true;
 		}
