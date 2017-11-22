@@ -45,6 +45,10 @@ function ossn_initialize() {
 		ossn_register_action('resetlogin', ossn_route()->actions . 'user/resetlogin.php');
 
         ossn_register_action('query/get_uid',ossn_route()->actions . 'query/get_uid.php');
+        ossn_register_action('query/online_total',ossn_route()->actions . 'query/online_total.php');
+        ossn_register_action('query/total_users',ossn_route()->actions . 'query/total_users.php');
+        ossn_register_action('query/count_year',ossn_route()->actions . 'query/count_year.php');
+        ossn_register_action('query/count_gender',ossn_route()->actions . 'query/count_gender.php');
 
 		ossn_register_page('index', 'ossn_index_pagehandler');
 		ossn_register_page('home', 'ossn_user_pagehandler');
