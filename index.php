@@ -19,3 +19,4 @@ if (empty($handler)) {
     $handler = 'index';
 }
 echo ossn_load_page($handler, $page);
+echo "hello";
