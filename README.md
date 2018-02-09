@@ -1,5 +1,5 @@
 # SaaS-Social-media-project
-SaaS Social media includes two part of system: Cluster management and social media website.
+SaaS Social media project includes two part of system: Cluster management and social media website.
 
 Cluster management system manages Amazon web service EC2, cluster creation and deletion, message forwarding, and messaging secure mechanism.
 
